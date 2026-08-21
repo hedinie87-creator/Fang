@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高楼营销法则 · 数字营销困境解决方案｜17模块可编辑重构</title>
+<style>
+:root{
+  --green-dark:#1B5E20;
+  --green-main:#388E3C;
+  --green-mid:#2E7D32;
+  --green-light:#4CAF50;
+  --green-pale:#E8F5E9;
+  --green-soft:#C8E6C9;
+  --gray:#F5F5F5;
+  --gray-line:#E0E0E0;
+  --text:#333333;
+  --text-soft:#555555;
+  --paper:#ffffff;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;font-family:"Noto Sans CJK SC","WenQuanYi Micro Hei","PingFang SC",sans-serif;
+  background:#eef2ee;color:var(--text);line-height:1.65;
+}
+/* ===== 顶部目录 ===== */
+.toc{
+  position:sticky;top:0;z-index:50;background:rgba(27,94,32,.96);color:#fff;
+  padding:14px 24px;box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+.toc h1{font-size:17px;margin:0 0 8px;letter-spacing:1px;font-weight:700;}
+.toc h1 small{font-weight:400;font-size:12px;opacity:.8;margin-left:8px;}
+.toc ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px;}
+.toc a{color:#fff;text-decoration:none;font-size:12px;padding:4px 9px;border-radius:14px;
+  background:rgba(255,255,255,.14);white-space:nowrap;transition:.2s;}
+.toc a:hover{background:var(--green-light);}
+/* ===== 模块通用 ===== */
+main{max-width:1180px;margin:0 auto;padding:24px;}
+.module{
+  background:var(--paper);border-radius:18px;margin-bottom:26px;padding:34px 38px 40px;
+  box-shadow:0 4px 18px rgba(56,142,60,.08);border:1px solid var(--gray-line);
+  position:relative;overflow:hidden;
+}
+.module-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;
+  border-bottom:2px solid var(--green-pale);padding-bottom:12px;}
+.module-no{flex:0 0 auto;width:44px;height:44px;border-radius:12px;
+  background:var(--green-main);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:19px;line-height:1;}
+.module-title{font-size:22px;font-weight:800;color:var(--green-dark);margin:0;}
+.module-sub{font-size:12px;color:var(--text-soft);margin-top:2px;}
+.edit-tip{margin-left:auto;font-size:11px;color:var(--green-mid);background:var(--green-pale);
+  padding:4px 10px;border-radius:10px;}
+[contenteditable]{outline:none;border-radius:4px;transition:background .15s;}
+[contenteditable]:focus{background:#fff8c4;box-shadow:0 0 0 2px var(--green-soft);}
+h2.ed,h3.ed,h4.ed{margin:0;}
+p.ed{margin:0 0 10px;}
+/* 竖向标题条 */
+.vert-bar{display:flex;justify-content:center;align-items:center;
+  width:100%;min-height:300px;border-radius:14px;background:var(--green-main);
+  color:#fff;font-size:34px;font-weight:800;letter-spacing:6px;
+  writing-mode:vertical-rl;text-orientation:mixed;}
+.vert-bar.dark{background:var(--green-dark);}
+/* 通用卡片 */
+.card{background:var(--green-pale);border:1px solid var(--green-soft);border-radius:12px;padding:16px 18px;}
+.tag{display:inline-block;background:var(--green-main);color:#fff;border-radius:8px;
+  padding:5px 14px;font-size:14px;font-weight:700;}
+.tag.light{background:var(--green-light);}
+.tag.soft{background:var(--green-pale);color:var(--green-dark);border:1px solid var(--green-soft);}
+.node{background:#fff;border:1.5px solid var(--green-main);color:var(--green-dark);
+  border-radius:10px;padding:10px 14px;font-weight:600;font-size:14px;text-align:center;}
+.center-hub{background:var(--green-main);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:800;text-align:center;line-height:1.2;}
+.flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;}
+.flow .step{background:var(--green-main);color:#fff;border-radius:9px;padding:9px 14px;font-weight:700;font-size:14px;}
+.flow .arr{color:var(--green-main);font-weight:800;font-size:20px;padding:0 6px;}
+ul.ed{margin:6px 0 12px;padding-left:20px;}
+ul.ed li{margin-bottom:5px;}
+.foot{font-size:12px;color:var(--text-soft);margin-top:8px;}
+/* 编辑模式开关 */
+.modebar{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;gap:8px;
+  background:#fff;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.18);padding:8px;}
+.modebar button{font-size:13px;border:0;padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:700;}
+.modebar .edit-btn{background:var(--green-main);color:#fff;}
+.modebar .export-btn{background:var(--green-pale);color:var(--green-dark);}
+body.editing .edit-tip{background:#fff3a0;}
+</style>
+</head>
+<body>
+
+<!-- 目录 -->
+<nav class="toc">
+  <h1>高楼营销法则 · 数字营销困境解决方案<small>17 模块可编辑重构 · 纵向滚动浏览</small></h1>
+  <ul>
+    <li><a href="#m01">01 高楼营销法则</a></li>
+    <li><a href="#m02">02 地基构建</a></li>
+    <li><a href="#m03">03 地基构建逻辑框架</a></li>
+    <li><a href="#m04">04 企业官网</a></li>
+    <li><a href="#m05">05 广告创意</a></li>
+    <li><a href="#m06">06 转化路径设计</a></li>
+    <li><a href="#m07">07 低层建筑</a></li>
+    <li><a href="#m08">08 MVP闭环</a></li>
+    <li><a href="#m09">09 转化流程精细化</a></li>
+    <li><a href="#m10">10 进攻思维</a></li>
+    <li><a href="#m11">11 渠道矩阵</a></li>
+    <li><a href="#m12">12 内容体系</a></li>
+    <li><a href="#m13">13 转化闭环</a></li>
+    <li><a href="#m14">14 高层建设</a></li>
+    <li><a href="#m15">15 高层建设定义</a></li>
+    <li><a href="#m16">16 鸟瞰框架</a></li>
+    <li><a href="#m17">17 营销矩阵/藤蔓</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ============ 模块01 ============ -->
+<section class="module" id="m01">
+  <div class="module-head"><div class="module-no">1</div>
+    <div><h2 class="module-title ed" contenteditable="true">数字营销困境解决方案-高楼营销法则</h2>
+    <div class="module-sub">红框1 · 顶层总览</div></div>
+    <span class="edit-tip">双击文字可编辑</span></div>
+  <p class="ed" contenteditable="true">我们更倡导企业从本地出发，夯实底层建筑，规划高层建设，分别从短期、中期的营销布局中打造企业的数字营销高地。</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;">
+    <div>
+      <div class="node" style="margin-bottom:12px;text-align:left;" contenteditable="true">短期：提升获客量</div>
+      <div class="node" style="margin-bottom:12px;text-align:left;" contenteditable="true">中期：降低获客成本</div>
+      <div class="node" style="text-align:left;" contenteditable="true">长期：建立竞争壁垒</div>
+    </div>
+    <div style="position:relative;">
+      <div class="tag dark" style="background:var(--green-dark);display:block;text-align:center;margin-bottom:8px;" contenteditable="true">高楼营销法则</div>
+      <div class="tag" style="display:block;text-align:center;margin-bottom:8px;background:var(--green-mid);" contenteditable="true">高层建设：拓宽流量，建立竞争壁垒</div>
+      <div class="tag light" style="display:block;text-align:center;margin-bottom:8px;" contenteditable="true">低层建筑：稳定效果，提升ROI</div>
+      <div class="tag" style="display:block;text-align:center;background:var(--green-dark);" contenteditable="true">地基构建：转化效率的根基</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:22px;background:var(--green-main);color:#fff;border-color:var(--green-main);">
+    <h3 class="ed" style="color:#fff;" contenteditable="true">数字大厦落地增长建议</h3>
+    <ul class="ed" style="color:#fff;" contenteditable="true">
+      <li>短期、中期、长期的营销布局是数字营销实现可持续增长的关键。</li>
+      <li>借力专业的外部增长团队是加速成功与节约成本的最佳选择。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 模块02 ============ -->
+<section class="module" id="m02">
+  <div class="module-head"><div class="module-no">2</div>
+    <div><h2 class="module-title ed" contenteditable="true">地基构建</h2>
+    <div class="module-sub">红框2 · 垂直标题</div></div></div>
+  <div class="vert-bar" contenteditable="true">地基构建</div>
+</section>
+
+<!-- ============ 模块03 ============ -->
+<section class="module" id="m03" style="padding-top:30px;">
+  <div class="module-head"><div class="module-no">3</div>
+    <div><h2 class="module-title ed" contenteditable="true">地基构建逻辑框架</h2>
+    <div class="module-sub">红框3 · 复杂多级流程映射网络（降噪：分栏+分组表达关系）</div></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:20px;align-items:start;">
+    <div>
+      <div class="card" style="margin-bottom:16px;">
+        <h3 class="ed" style="color:var(--green-dark);" contenteditable="true">什么是地基构建</h3>
+        <p class="ed" contenteditable="true">地基构建的逻辑决定了我们的数字大厦能否稳步有效发展，它包含了结合影响客户决策的所有前置事宜，做好地基构建，可以让企业更好转化，加快短周期变现。该营销层是90%以上企业均不重视，10%企业虽然有所重视但却做得不好。</p>
+      </div>
+      <div class="card">
+        <h3 class="ed" style="color:var(--green-dark);" contenteditable="true">地基构建包括什么</h3>
+        <p class="ed" contenteditable="true">地基构建具体包括：品牌定位、品牌形象塑造、内容策略、官网建设、营销配置布局等，是企业短期需要进行的营销投入，并且是短周期内就可以看到收益的。</p>
+      </div>
+    </div>
+    <div>
+      <h3 class="ed" style="text-align:center;color:var(--green-dark);" contenteditable="true">地基构建逻辑框架<br><small style="font-weight:400;font-size:12px;">内容+好体验+好体验=高转化</small></h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div class="node" style="background:var(--green-main);color:#fff;" contenteditable="true">品牌定位</div>
+        <div class="node" style="background:var(--green-main);color:#fff;" contenteditable="true">企业定位</div>
+        <div class="node" style="background:var(--green-main);color:#fff;" contenteditable="true">品牌主张</div>
+        <div class="node" style="background:var(--green-main);color:#fff;" contenteditable="true">声誉</div>
+        <div class="node" style="background:var(--green-main);color:#fff;" contenteditable="true">产品价值</div>
+        <div class="node" style="background:var(--green-main);color:#fff;" contenteditable="true">内容</div>
+        <div class="node" style="background:var(--green-main);color:#fff;" contenteditable="true">产品信息</div>
+        <div class="node" style="background:var(--green-main);color:#fff;" contenteditable="true">产品优势</div>
+      </div>
+      <div style="text-align:center;margin:14px 0;color:var(--green-main);font-weight:700;">▼ 呈现在 / 形式 + 承载 ▼</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div class="node" contenteditable="true">文章</div><div class="node" contenteditable="true">企业官网</div>
+        <div class="node" contenteditable="true">视频</div><div class="node" contenteditable="true">媒体平台</div>
+        <div class="node" contenteditable="true">图片</div><div class="node" contenteditable="true">广告平台</div>
+        <div class="node" contenteditable="true">直播</div><div class="node" contenteditable="true">社交账号</div>
+        <div class="node" contenteditable="true">音频</div><div class="node" contenteditable="true">线下物料</div>
+        <div style="grid-column:2;" class="node" contenteditable="true">App/小程序</div>
+      </div>
+    </div>
+    <div>
+      <h4 class="ed" style="color:var(--green-dark);text-align:right;" contenteditable="true">传递至 · 评估维度</h4>
+      <div class="node" style="text-align:right;margin-bottom:8px;background:var(--green-pale);border-color:var(--green-light);" contenteditable="true">表现层：良好的内容呈现</div>
+      <div class="node" style="text-align:right;margin-bottom:8px;background:var(--green-pale);border-color:var(--green-light);" contenteditable="true">框架层：高效的转化框架</div>
+      <div class="node" style="text-align:right;margin-bottom:8px;background:var(--green-pale);border-color:var(--green-light);" contenteditable="true">结构层：合理的价值结构</div>
+      <div class="node" style="text-align:right;margin-bottom:8px;background:var(--green-pale);border-color:var(--green-light);" contenteditable="true">范围层：具体的目标受众</div>
+      <div class="node" style="text-align:right;background:var(--green-pale);border-color:var(--green-light);" contenteditable="true">战略层：明确的需求目标</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块04 ============ -->
+<section class="module" id="m04">
+  <div class="module-head"><div class="module-no">4</div>
+    <div><h2 class="module-title ed" contenteditable="true">地基构建的三大核心之一-企业官网</h2>
+    <div class="module-sub">红框4</div></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:20px;">
+    <div>
+      <div class="card" style="margin-bottom:14px;background:var(--green-main);color:#fff;border:0;">
+        <h3 class="ed" style="color:#fff;" contenteditable="true">品牌展示 提升企业形象 传播产品价值</h3></div>
+      <div class="card" style="margin-bottom:14px;background:var(--green-mid);color:#fff;border:0;">
+        <h3 class="ed" style="color:#fff;" contenteditable="true">营销转化 提升转化率 降低获客成本</h3></div>
+      <div class="card" style="background:var(--green-dark);color:#fff;border:0;">
+        <h3 class="ed" style="color:#fff;" contenteditable="true">数据留存 指导营销策略 的调整</h3></div>
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:center;">
+        <div class="center-hub" style="width:40px;height:40px;border-radius:50%;font-size:17px;">1</div>
+        <div class="node" style="text-align:left;" contenteditable="true">打造差异化，避免同质化。并将内容放在第一位，保证"网站框架服务于内容"。</div>
+        <div class="center-hub" style="width:40px;height:40px;border-radius:50%;font-size:17px;">2</div>
+        <div class="node" style="text-align:left;" contenteditable="true">每个页面留给客户关注只有 20 秒左右的时间，想办法让访客在 20 秒后仍然愿意留在网站中。</div>
+        <div class="center-hub" style="width:40px;height:40px;border-radius:50%;font-size:17px;">3</div>
+        <div class="node" style="text-align:left;" contenteditable="true">企业官网是线上流量的最终重镇地，要增加企业官网的转化工具，以提升 ROI。</div>
+        <div class="center-hub" style="width:40px;height:40px;border-radius:50%;font-size:17px;">4</div>
+        <div class="node" style="text-align:left;" contenteditable="true">一个优质网站的建设是一个持续迭代的过程，这样才能打造出一个具竞争力边的企业官网。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块05 ============ -->
+<section class="module" id="m05">
+  <div class="module-head"><div class="module-no">5</div>
+    <div><h2 class="module-title ed" contenteditable="true">地基构建的三大核心之二-广告创意</h2>
+    <div class="module-sub">红框5</div></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div>
+      <div class="tag" style="margin-bottom:10px;" contenteditable="true">广告文案</div>
+      <p class="ed" contenteditable="true">用户需求痛点·产品优势卖点分析·竞品收集分析·针对需求痛点撰写·不同需求痛点文案拼装·文案测试性格·投放测试确认哪个类型，哪个需求更强·同样模式写出更多文案，继续测试。</p>
+      <p class="ed" contenteditable="true">创意配图分为两个部分，一个对应品牌一个对应销售，一个是形象展示，一个是创意展示，形象展示可以是品牌配图或者好看的视觉设计。创意配图可以是解决需求痛点或者迎合用户好处。</p>
+    </div>
+    <div>
+      <div class="tag" style="margin-bottom:10px;" contenteditable="true">广告落地页</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+        <div class="node" style="padding:7px 11px;font-size:13px;" contenteditable="true">内容层</div>
+        <div class="node" style="padding:7px 11px;font-size:13px;" contenteditable="true">景别层</div>
+        <div class="node" style="padding:7px 11px;font-size:13px;" contenteditable="true">指引层</div>
+        <div class="node" style="padding:7px 11px;font-size:13px;" contenteditable="true">视觉层</div>
+        <div class="node" style="padding:7px 11px;font-size:13px;" contenteditable="true">技术层</div>
+      </div>
+      <p class="foot ed" contenteditable="true">落地页是数字营销中转化率的第一生产力，信息传送是落地页的核心。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块06 ============ -->
+<section class="module" id="m06">
+  <div class="module-head"><div class="module-no">6</div>
+    <div><h2 class="module-title ed" contenteditable="true">地基构建的三大核心之三-转化路径设计</h2>
+    <div class="module-sub">红框6 · 两条简单流程链（少线降噪）</div></div></div>
+  <div style="margin-bottom:22px;">
+    <div class="tag" style="margin-bottom:8px;" contenteditable="true">用户决策</div>
+    <div class="flow">
+      <div class="step" contenteditable="true">流量</div><span class="arr">→</span>
+      <div class="step" contenteditable="true">兴趣</div><span class="arr">→</span>
+      <div class="step" contenteditable="true">欲望</div><span class="arr">→</span>
+      <div class="step" contenteditable="true">行动</div><span class="arr">→</span>
+      <div class="step" contenteditable="true">忠诚</div>
+    </div>
+  </div>
+  <div style="margin-bottom:22px;">
+    <div class="tag" style="margin-bottom:8px;" contenteditable="true">转化阶段</div>
+    <div class="flow">
+      <div class="step" contenteditable="true">触达</div><span class="arr">→</span>
+      <div class="step" contenteditable="true">引导留咨询</div><span class="arr">→</span>
+      <div class="step" contenteditable="true">潜客培育</div><span class="arr">→</span>
+      <div class="step" contenteditable="true">达成交易</div>
+    </div>
+  </div>
+  <div>
+    <div class="tag" style="margin-bottom:8px;" contenteditable="true">转化设计</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+      <div class="node" style="font-size:13px;" contenteditable="true">内容营销<br>广告营销<br>活动营销<br>数字营销</div>
+      <div class="node" style="font-size:13px;" contenteditable="true">诊断表单<br>咨询表单<br>微信交流<br>礼品推送</div>
+      <div class="node" style="font-size:13px;" contenteditable="true">干货分享<br>案例分享<br>课程/直播<br>线下活动</div>
+      <div class="node" style="font-size:13px;" contenteditable="true">二次开发<br>图文分析<br>客户维系<br>...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块07 ============ -->
+<section class="module" id="m07">
+  <div class="module-head"><div class="module-no">7</div>
+    <div><h2 class="module-title ed" contenteditable="true">低层建筑</h2>
+    <div class="module-sub">红框7 · 垂直标题</div></div></div>
+  <div class="vert-bar" contenteditable="true">低层建筑</div>
+</section>
+
+<!-- ============ 模块08 ============ -->
+<section class="module" id="m08">
+  <div class="module-head"><div class="module-no">8</div>
+    <div><h2 class="module-title ed" contenteditable="true">MVP 最小业务闭环验证</h2>
+    <div class="module-sub">红框8 · 菱形/四角闭环映射</div></div></div>
+  <p class="ed" contenteditable="true">基于地基的标准化能力，搭建"官网+SEM+GEO"的最小业务闭环，验证地基与业务的适配性。</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;align-items:center;text-align:center;">
+    <div class="node" contenteditable="true">精准流量<br>快速获取</div>
+    <div class="center-hub" style="width:130px;height:130px;margin:0 auto;font-size:15px;" contenteditable="true">官网<br><span style="font-size:12px;font-weight:600;">最小数字化地基</span></div>
+    <div class="node" contenteditable="true">低成本挖掘<br>新兴机会</div>
+    <div></div>
+    <div class="node" contenteditable="true">SEM</div>
+    <div class="node" contenteditable="true">GEO</div>
+  </div>
+</section>
+
+<!-- ============ 模块09 ============ -->
+<section class="module" id="m09">
+  <div class="module-head"><div class="module-no">9</div>
+    <div><h2 class="module-title ed" contenteditable="true">转化流程精细化（中心辐射 · 无先后）</h2>
+    <div class="module-sub">红框9 · 1中心 + 10外围节点，位置环绕表达关系，不画密集放射线</div></div></div>
+  <div style="position:relative;height:560px;max-width:760px;margin:0 auto;">
+    <div class="center-hub" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:150px;height:150px;font-size:17px;" contenteditable="true">转化流程精细化</div>
+    <div class="node" style="position:absolute;left:2%;top:8%;" contenteditable="true">明确推广渠道</div>
+    <div class="node" style="position:absolute;left:39%;top:2%;" contenteditable="true">研究转化行为</div>
+    <div class="node" style="position:absolute;right:2%;top:8%;" contenteditable="true">研究转化行为与触点</div>
+    <div class="node" style="position:absolute;right:0%;top:42%;" contenteditable="true">明确关键指标</div>
+    <div class="node" style="position:absolute;right:0%;top:64%;" contenteditable="true">建立监测体系</div>
+    <div class="node" style="position:absolute;right:2%;top:86%;" contenteditable="true">借助营销工具</div>
+    <div class="node" style="position:absolute;left:39%;top:90%;" contenteditable="true">内容/物料迭代</div>
+    <div class="node" style="position:absolute;left:2%;top:86%;" contenteditable="true">用户体验优化</div>
+    <div class="node" style="position:absolute;left:0%;top:64%;" contenteditable="true">定向投放</div>
+    <div class="node" style="position:absolute;left:2%;top:42%;" contenteditable="true">搭建标签</div>
+  </div>
+</section>
+
+<!-- ============ 模块10 ============ -->
+<section class="module" id="m10">
+  <div class="module-head"><div class="module-no">10</div>
+    <div><h2 class="module-title ed" contenteditable="true">时刻保持进攻思维</h2>
+    <div class="module-sub">红框10 · 20%/80% 比例示意</div></div></div>
+  <p class="ed" contenteditable="true">企业应该保持进攻思维，始终抽出 20% 的精力与预算去探索创新渠道，这样才能建立起企业数字营销的冲天大厦。</p>
+  <div style="display:flex;gap:26px;align-items:center;flex-wrap:wrap;">
+    <div style="width:200px;height:200px;border-radius:50%;
+      background:conic-gradient(var(--green-light) 0 20%, var(--green-dark) 20% 100%);
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-align:center;line-height:1.3;
+      flex:0 0 auto;" contenteditable="true">20% 探索拓展渠道<br><span style="font-size:13px;font-weight:600;">80% 主要突破渠道</span></div>
+    <div>
+      <div class="tag" style="margin-bottom:8px;background:var(--green-dark);" contenteditable="true">80% 主要突破渠道</div>
+      <ul class="ed" contenteditable="true">
+        <li>已验证渠道</li><li>垂直渠道</li><li>主流渠道</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块11 ============ -->
+<section class="module" id="m11">
+  <div class="module-head"><div class="module-no">11</div>
+    <div><h2 class="module-title ed" contenteditable="true">低层建筑的三大方向-渠道矩阵</h2>
+    <div class="module-sub">红框11 · 三列矩阵</div></div></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+    <div class="card" style="border-color:var(--green-main);">
+      <h3 class="ed" style="color:var(--green-dark);" contenteditable="true">付费流量</h3>
+      <p class="ed" contenteditable="true">代表渠道：SEM 竞价投放、平台付费广告、KOL/KOC 付费合作</p>
+      <p class="ed" style="font-size:13px;" contenteditable="true">投入可控、见效快、意向度高、适合精准获客成本较高的行业，见效快，验证市场需求与转化路径，是低层建筑"快速跑通"的核心抓手。</p>
+    </div>
+    <div class="card" style="border-color:var(--green-main);">
+      <h3 class="ed" style="color:var(--green-dark);" contenteditable="true">免费流量</h3>
+      <p class="ed" contenteditable="true">代表渠道：SEO 自然排名优化、内容平台免费运营、社群/口碑免费裂变</p>
+      <p class="ed" style="font-size:13px;" contenteditable="true">成本低、粘性高、流量长效，通过内容营销、用户经营获取自然流量，是降低整体获客成本、构建长效流量壁垒的核心支撑。</p>
+    </div>
+    <div class="card" style="border-color:var(--green-main);">
+      <h3 class="ed" style="color:var(--green-dark);" contenteditable="true">新兴流量</h3>
+      <p class="ed" contenteditable="true">代表渠道：AI 搜索营销 (GEO)、AIGC 内容营销</p>
+      <p class="ed" style="font-size:13px;" contenteditable="true">竞争小、红利足、差异化触达，抢占前沿渠道红利，触达传统搜索渠道覆盖不到的用户群体，为低层建筑注入全新增量。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块12 ============ -->
+<section class="module" id="m12">
+  <div class="module-head"><div class="module-no">12</div>
+    <div><h2 class="module-title ed" contenteditable="true">低层建筑的三大方向-内容体系</h2>
+    <div class="module-sub">红框12 · 五层金字塔（SVG：1三角形+4梯形，真实text）</div></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:start;">
+    <div>
+      <h3 class="ed" style="color:var(--green-dark);" contenteditable="true">内容营销效果体系</h3>
+      <p class="ed" contenteditable="true">根据内容营销效果评估"五金金字塔"模型，构建内容体系，应系统化、阶梯式地将内容营销从基础执行到业务价值的全过程。</p>
+      <h3 class="ed" style="color:var(--green-dark);margin-top:14px;" contenteditable="true">场景维度</h3>
+      <p class="ed" contenteditable="true">搜索场景—干货解决方案 │ 浏览场景—短平快痛点视频 │ 社交场景—案例图文图文</p>
+      <h3 class="ed" style="color:var(--green-dark);margin-top:14px;" contenteditable="true">生命周期维度</h3>
+      <p class="ed" contenteditable="true">认知→行业干货 │ 考虑→产品对比 │ 转化→优惠折扣</p>
+    </div>
+    <div style="text-align:center;">
+      <svg viewBox="0 0 400 420" width="100%" style="max-width:380px;" aria-label="内容体系金字塔">
+        <polygon points="200,10 340,95 60,95" fill="#1B5E20"/>
+        <polygon points="60,95 340,95 360,170 40,170" fill="#2E7D32"/>
+        <polygon points="40,170 360,170 375,250 25,250" fill="#388E3C"/>
+        <polygon points="25,250 375,250 390,330 10,330" fill="#4CAF50"/>
+        <polygon points="10,330 390,330 400,410 0,410" fill="#81C784"/>
+        <text x="200" y="60" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="'Noto Sans CJK SC'">L5 价值层 业务贡献度(成交)</text>
+        <text x="200" y="135" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="'Noto Sans CJK SC'">L4 影响层 品牌影响力(信任)</text>
+        <text x="200" y="215" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="'Noto Sans CJK SC'">L3 交互层 客户吸引力(粘性)</text>
+        <text x="200" y="295" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="'Noto Sans CJK SC'">L2 意向层 意向命中率(准度)</text>
+        <text x="200" y="375" text-anchor="middle" fill="#1B5E20" font-size="13" font-weight="700" font-family="'Noto Sans CJK SC'">L1 覆盖层 基础覆盖度(广度)</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块13 ============ -->
+<section class="module" id="m13">
+  <div class="module-head"><div class="module-no">13</div>
+    <div><h2 class="module-title ed" contenteditable="true">低层建筑的三大方向-转化闭环</h2>
+    <div class="module-sub">红框13 · 四节点纵向链 + 双弧闭环</div></div></div>
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;">
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="node" contenteditable="true">流量引入</div>
+      <div class="node" contenteditable="true">统一承载</div>
+      <div class="node" contenteditable="true">用户分层运营</div>
+      <div class="node" contenteditable="true">业绩产出</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+      <span class="tag soft" style="writing-mode:vertical-rl;height:90px;" contenteditable="true">迭代优化</span>
+      <span style="color:var(--green-main);font-size:22px;">↺</span>
+      <span class="tag soft" style="writing-mode:vertical-rl;height:90px;" contenteditable="true">新增流量</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="card" style="background:var(--green-main);color:#fff;border:0;" contenteditable="true">数据监测与归因</div>
+      <p class="ed" style="font-size:13px;" contenteditable="true">转化路径设计和转化闭环的关系：转化路径设计是转化闭环的核心执行支撑，转化闭环是转化路径设计的运转保障与优化依托。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块14 ============ -->
+<section class="module" id="m14">
+  <div class="module-head"><div class="module-no">14</div>
+    <div><h2 class="module-title ed" contenteditable="true">高层建设</h2>
+    <div class="module-sub">红框14 · 垂直标题</div></div></div>
+  <div class="vert-bar dark" contenteditable="true">高层建设</div>
+</section>
+
+<!-- ============ 模块15 ============ -->
+<section class="module" id="m15">
+  <div class="module-head"><div class="module-no">15</div>
+    <div><h2 class="module-title ed" contenteditable="true">高层建设定义与竞争力迭代</h2>
+    <div class="module-sub">红框15 · 能力环（中心+10外围，环绕布局降噪）</div></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;">
+    <div>
+      <h3 class="ed" style="color:var(--green-dark);" contenteditable="true">什么是高层建设</h3>
+      <p class="ed" contenteditable="true">符合企业长期发展需求，实现可持续增长、降本增效、增强竞争力的手段。营销领域 80% 企业没有意识识别体验；20% 企业虽有所触及但不成体系，无法坚持。</p>
+      <h3 class="ed" style="color:var(--green-dark);margin-top:12px;" contenteditable="true">高层建设包括什么</h3>
+      <p class="ed" contenteditable="true">高层建设包括：内容营销、品牌升级、产品竞争力迭代、新流量形态探索、营销前沿策略、新平台拓展等。属于企业的中长期营销布局。</p>
+    </div>
+    <div style="position:relative;height:460px;max-width:460px;margin:0 auto;">
+      <div class="center-hub" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+        width:130px;height:130px;font-size:13px;line-height:1.3;" contenteditable="true">产品 / 竞争力迭代 / 品牌</div>
+      <div class="node" style="position:absolute;left:50%;top:0;transform:translateX(-50%);font-size:12px;padding:6px 10px;" contenteditable="true">价格策略</div>
+      <div class="node" style="position:absolute;right:4%;top:14%;font-size:12px;padding:6px 10px;" contenteditable="true">供应链</div>
+      <div class="node" style="position:absolute;right:0%;top:44%;font-size:12px;padding:6px 10px;" contenteditable="true">功能</div>
+      <div class="node" style="position:absolute;right:4%;top:72%;font-size:12px;padding:6px 10px;" contenteditable="true">差异化</div>
+      <div class="node" style="position:absolute;right:18%;bottom:2%;font-size:12px;padding:6px 10px;" contenteditable="true">价值</div>
+      <div class="node" style="position:absolute;left:18%;bottom:2%;font-size:12px;padding:6px 10px;" contenteditable="true">服务</div>
+      <div class="node" style="position:absolute;left:4%;top:72%;font-size:12px;padding:6px 10px;" contenteditable="true">声誉</div>
+      <div class="node" style="position:absolute;left:0%;top:44%;font-size:12px;padding:6px 10px;" contenteditable="true">定位</div>
+      <div class="node" style="position:absolute;left:4%;top:14%;font-size:12px;padding:6px 10px;" contenteditable="true">精细化</div>
+      <div class="node" style="position:absolute;left:50%;top:auto;bottom:0;transform:translateX(-50%);font-size:12px;padding:6px 10px;" contenteditable="true">品质</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 模块16 ============ -->
+<section class="module" id="m16">
+  <div class="module-head"><div class="module-no">16</div>
+    <div><h2 class="module-title ed" contenteditable="true">高楼建筑鸟瞰框架</h2>
+    <div class="module-sub">红框16 · 中心定位矩阵 + 9外围差异化节点</div></div></div>
+  <div style="position:relative;height:520px;max-width:760px;margin:0 auto;">
+    <div class="center-hub" style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+      width:150px;height:150px;font-size:17px;" contenteditable="true">定位矩阵</div>
+    <div class="tag" style="position:absolute;left:4%;top:6%;background:var(--green-dark);" contenteditable="true">终极用户选择混乱</div>
+    <div class="node" style="position:absolute;left:6%;top:34%;" contenteditable="true">品类差异化</div>
+    <div class="node" style="position:absolute;right:6%;top:34%;" contenteditable="true">品牌差异化</div>
+    <div class="node" style="position:absolute;left:4%;top:60%;" contenteditable="true">抢占分赛道</div>
+    <div class="node" style="position:absolute;left:38%;top:66%;" contenteditable="true">增强差异化</div>
+    <div class="node" style="position:absolute;right:4%;top:60%;" contenteditable="true">简化用户决策</div>
+    <div class="node" style="position:absolute;left:4%;top:86%;" contenteditable="true">降低用户选择成本</div>
+    <div class="node" style="position:absolute;left:36%;top:90%;" contenteditable="true">价值差异化</div>
+    <div class="node" style="position:absolute;left:50%;top:90%;transform:translateX(-50%);" contenteditable="true">运营差异化</div>
+    <div class="node" style="position:absolute;right:4%;top:86%;" contenteditable="true">提升企业执效效率</div>
+  </div>
+</section>
+
+<!-- ============ 模块17 ============ -->
+<section class="module" id="m17">
+  <div class="module-head"><div class="module-no">17</div>
+    <div><h2 class="module-title ed" contenteditable="true">营销矩阵布局与「藤蔓」数字全案</h2>
+    <div class="module-sub">红框17 · 完整展开，不折叠不删字</div></div></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px;">
+    <div class="tag soft" style="text-align:left;background:var(--green-pale);" contenteditable="true"><b>内容矩阵</b> 重点内容、专业内容 矩阵 BGC、PGC、UGC</div>
+    <div class="tag soft" style="text-align:left;background:var(--green-pale);" contenteditable="true"><b>平台矩阵</b> 横向平台布局 矩阵 纵向平台布局</div>
+    <div class="tag soft" style="text-align:left;background:var(--green-pale);" contenteditable="true"><b>账号矩阵</b> 官方号/专家号 矩阵 机构号/KOL/个人号</div>
+  </div>
+  <h3 class="ed" style="color:var(--green-dark);text-align:center;" contenteditable="true">基于高楼营销法则的「藤蔓」数字全案</h3>
+  <p class="ed" style="text-align:center;font-size:18px;color:var(--green-main);font-weight:700;" contenteditable="true">绿意 · 灵活 · 高性价比</p>
+  <p class="ed" contenteditable="true">藤蔓数字全案以"客户成功"为核心动力，聚焦"轻量、灵活、高性价比"三大特性，做品牌数字化、业务数字化、营销数字化全案线，辅助企业立仗战略规划到落地执行，突破转型瓶颈，实现持续增长。</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;">
+    <div class="card" style="border-color:var(--green-main);">
+      <h4 class="ed" style="color:var(--green-dark);" contenteditable="true">构建品牌力</h4>
+      <p class="ed" style="font-size:13px;" contenteditable="true">构建可持续的品牌资产 │ 品牌路线与定位 │ 品牌内容体系打造 │ 视觉形象数字化升级 │ 线上口碑与声誉管理</p></div>
+    <div class="card" style="border-color:var(--green-main);">
+      <h4 class="ed" style="color:var(--green-dark);" contenteditable="true">增长能力长 增</h4>
+      <p class="ed" style="font-size:13px;" contenteditable="true">构建可持续的精准获客体系 │ 营销战略制定 │ 精准流量获取 │ 高价值内容交流 │ 转化路径的科学优化 │ 数字资产与经验沉淀</p></div>
+    <div class="card" style="border-color:var(--green-main);">
+      <h4 class="ed" style="color:var(--green-dark);" contenteditable="true">赋能业务流</h4>
+      <p class="ed" style="font-size:13px;" contenteditable="true">用数字化工具提升人效与转化 │ 前沿转化工具开发 │ 内部管理工具搭建 │ 业务流程梳理与数字化 │ 数据决策看板</p></div>
+  </div>
+  <h3 class="ed" style="color:var(--green-dark);" contenteditable="true">为什么选择「藤蔓」数字全案</h3>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px;">
+    <div class="card" style="border-color:var(--green-light);">
+      <h4 class="ed" style="color:var(--green-dark);" contenteditable="true">轻量化启动</h4>
+      <p class="ed" style="font-size:12px;" contenteditable="true">无需动用百万的投入，我们以核心目标为突破口，让您以极低成本，快速启动项目。</p></div>
+    <div class="card" style="border-color:var(--green-light);">
+      <h4 class="ed" style="color:var(--green-dark);" contenteditable="true">目标导向</h4>
+      <p class="ed" style="font-size:12px;" contenteditable="true">我们是将与您共同制定清晰的年度 OKR 目标，并拆解为可执行的 KPI 考核指标，一切工作围绕您的商业目标展开。</p></div>
+    <div class="card" style="border-color:var(--green-light);">
+      <h4 class="ed" style="color:var(--green-dark);" contenteditable="true">敏捷迭代</h4>
+      <p class="ed" style="font-size:12px;" contenteditable="true">拒绝僵化执行，我们将依据市场反馈和数据表现，灵活调整投放渠道与内容策略，确保营销持续处于最优状态，增强抗风险能力。</p></div>
+    <div class="card" style="border-color:var(--green-light);">
+      <h4 class="ed" style="color:var(--green-dark);" contenteditable="true">长期陪伴</h4>
+      <p class="ed" style="font-size:12px;" contenteditable="true">目标是成为您为期 3 年的增长伙伴，您所获得的不仅是一个服务团队，更有我们沉淀多年的营销方法论以及实战经验的持续赋能。</p></div>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center;border:1.5px dashed var(--green-main);border-radius:12px;padding:14px;">
+    <div style="width:72px;height:72px;background:var(--green-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--green-dark);font-weight:700;text-align:center;flex:0 0 auto;" contenteditable="true">二维码<br>占位</div>
+    <div>
+      <p class="ed" style="margin:0;font-weight:700;color:var(--green-dark);" contenteditable="true">扫描下方二维码</p>
+      <p class="ed" style="margin:0;font-size:13px;" contenteditable="true">了解「藤蔓」数字全案 如何帮你实现长期增长！</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="modebar">
+  <button class="edit-btn" id="toggleEdit">进入编辑模式</button>
+  <button class="export-btn" id="exportBtn">导出 HTML</button>
+</div>
+
+<script>
+const btn=document.getElementById('toggleEdit');
+let editing=false;
+btn.addEventListener('click',()=>{
+  editing=!editing;
+  document.body.classList.toggle('editing',editing);
+  document.querySelectorAll('[contenteditable]').forEach(el=>el.contentEditable=editing?'true':'false');
+  btn.textContent=editing?'退出编辑模式':'进入编辑模式';
+});
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const html=document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='gaolou_kebianji.html';a.click();
+});
+</script>
+</body>
+</html>
